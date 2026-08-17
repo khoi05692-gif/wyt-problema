@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wythney vs. J-Hope</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #150c22;
+    --bg2: #1f1333;
+    --surface: #2a1a44;
+    --text: #f3edff;
+    --text-dim: #b9a8d9;
+    --accent: #b98eff;
+    --accent-2: #ff6fa5;
+    --warn: #ffcf5c;
+    --line: rgba(185,142,255,0.25);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  body::before{
+    content:"";
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(185,142,255,0.12), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(255,111,165,0.10), transparent 45%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .wrap{ max-width: 760px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  header.hero{
+    padding: 72px 0 48px;
+    text-align: center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size: 13px; letter-spacing: 0.04em;
+    color: var(--accent-2);
+    background: rgba(255,111,165,0.1);
+    border: 1px solid rgba(255,111,165,0.3);
+    padding: 6px 14px; border-radius: 999px;
+    margin-bottom: 28px;
+  }
+  .dot{ width:6px; height:6px; border-radius:50%; background: var(--accent-2); animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1; transform:scale(1);} 50%{opacity:0.4; transform:scale(0.7);} }
+
+  h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(32px, 6vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+  }
+  h1 em{ font-style: italic; font-weight: 500; color: var(--accent); }
+
+  .sub{
+    margin-top: 18px;
+    color: var(--text-dim);
+    font-size: 17px;
+    max-width: 460px;
+    margin-left: auto; margin-right: auto;
+  }
+
+  /* countdown */
+  .countdown{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 48px 0;
+  }
+  .unit{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 8px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .unit::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(185,142,255,0.08), transparent 60%);
+  }
+  .unit .num{
+    font-family:'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(28px, 6vw, 44px);
+    font-variant-numeric: tabular-nums;
+    position: relative;
+  }
+  .unit .lbl{
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin-top: 6px;
+    position: relative;
+  }
+
+  .lightstick{
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--accent);
+    margin: 0 auto 32px;
+    box-shadow: 0 0 24px 8px rgba(185,142,255,0.55);
+    animation: breathe 2.4s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{ box-shadow: 0 0 18px 6px rgba(185,142,255,0.4); transform: scale(1); }
+    50%{ box-shadow: 0 0 32px 12px rgba(255,111,165,0.5); background: var(--accent-2); transform: scale(1.15); }
+  }
+
+  /* letter section */
+  .letter{
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 40px clamp(20px, 5vw, 48px);
+    margin: 40px 0 64px;
+  }
+  .letter .tag{
+    font-size: 12px;
+    color: var(--warn);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 18px;
+    display:block;
+  }
+  .letter p{
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+  .letter p:last-of-type{ margin-bottom: 0; }
+  .signoff{
+    text-align: right;
+    font-style: italic;
+    color: var(--text-dim) !important;
+    font-size: 15px !important;
+    margin-top: 28px !important;
+  }
+
+  /* reveal card */
+  .reveal{ margin: 0 0 64px; }
+  .reveal-card{
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 44px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .reveal-face{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .reveal-face[hidden]{ display: none; }
+  .spark{
+    margin-bottom: 18px;
+    animation: spin 6s linear infinite;
+  }
+  @keyframes spin{ from{ transform: rotate(0deg); } to{ transform: rotate(360deg); } }
+  .reveal-title{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .reveal-sub{
+    color: var(--text-dim);
+    font-size: 14px;
+    max-width: 320px;
+    margin-bottom: 22px;
+  }
+  .reveal-btn{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--bg);
+    background: var(--accent);
+    border: none;
+    padding: 12px 28px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .reveal-btn:hover{ background: var(--accent-2); transform: translateY(-2px); }
+  .reveal-link{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--bg);
+    background: var(--accent-2);
+    padding: 12px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+  .reveal-link:hover{ transform: translateY(-2px); }
+
+  /* glossary strip */
+  .glossary{
+    margin: 0 0 72px;
+  }
+  .glossary h2{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .glossary .hint{
+    color: var(--text-dim);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .term{
+    display: flex;
+    gap: 18px;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+  }
+  .term:last-child{ border-bottom: 1px solid var(--line); }
+  .term .word{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+  .term .def{ color: var(--text-dim); font-size: 15px; }
+
+  footer{
+    text-align: center;
+    padding: 40px 0 60px;
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+  footer .heart{ color: var(--accent-2); }
+
+  @media (max-width: 480px){
+    .countdown{ gap: 8px; }
+    .unit{ padding: 16px 4px; border-radius: 12px; }
+    .term{ flex-direction: column; gap: 4px; }
+    .term .word{ min-width: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .dot, .lightstick{ animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow"><span class="dot"></span> ela vai surtar em breve</span>
+    <h1>Faltam poucos dias<br>pra Wythney ver o <em>J-Hope</em></h1>
+    <p class="sub">Carta escrita por alguém que descobriu o que é BTS pesquisando no Google há 20 minutos.</p>
+  </header>
+
+  <div class="lightstick" aria-hidden="true"></div>
+
+  <div class="countdown" id="countdown" aria-label="Contagem regressiva para o show">
+    <div class="unit"><div class="num" id="d">--</div><div class="lbl">dias</div></div>
+    <div class="unit"><div class="num" id="h">--</div><div class="lbl">horas</div></div>
+    <div class="unit"><div class="num" id="m">--</div><div class="lbl">min</div></div>
+    <div class="unit"><div class="num" id="s">--</div><div class="lbl">seg</div></div>
+  </div>
+
+  <section class="letter">
+    <span class="tag">carta oficial de quem não entende nada</span>
+    <p>Wythney,</p>
+    <p>O relógio aí em cima não mente: é sério, vai acontecer, você vai ver o J-Hope pessoalmente e eu vou continuar aqui sem entender nada, só admirando de longe o seu nível de comprometimento com uma causa.</p>
+    <p>Reservei um tempinho pra pesquisar sobre esse tal de BTS e cheguei à conclusão de que existem sete rapazes coreanos que dançam melhor sincronizados do que eu ando em linha reta, e que aparentemente são considerados gostosos demais pra serem reais, decisão que não é minha, é da internet inteira.</p>
+    <p>Não vou fingir que virei ARMY da noite pro dia. Mas vou fingir que entendo, sorrir educadamente quando você mandar quinze áudios sobre o quão gostosos eles são e como esse show vai ser incrível, e fingir que sei diferenciar os sete só pelo cabelo (spoiler: não sei).</p>
+    <p>Inacreditavelmente você conseguiu esse ingresso. Consigo dizer parabéns e que você realmente vai tá lá, que loucura isso, me deixa muito feliz por você, tem que aproveitar.</p>
+    <p class="signoff">com carinho, sarcasmo e ignorância total sobre k-pop,<br>alguém que te ama</p>
+  </section>
+
+  <section class="reveal">
+    <div class="reveal-card" id="revealCard">
+      <div class="reveal-face reveal-front">
+        <div class="spark" aria-hidden="true">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+            <path d="M32 4 L38 26 L60 32 L38 38 L32 60 L26 38 L4 32 L26 26 Z" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <p class="reveal-title">aperte se tiver coragem</p>
+        <button class="reveal-btn" id="revealBtn" type="button">revelar</button>
+      </div>
+      <div class="reveal-face reveal-back" id="revealBack" hidden>
+        <p class="reveal-title">eu avisei</p>
+        <p class="reveal-sub">clica aí embaixo, eu não aguentei nem pesquisar direito</p>
+        <a class="reveal-link" href="https://www.google.com/search?q=j-hope+bts&tbm=isch" target="_blank" rel="noopener">ver fotos dele agora &#8599;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="glossary">
+    <h2>Glossário BTS explicado por um leigo</h2>
+    <p class="hint">termos que aprendi pesquisando e que talvez estejam errados</p>
+
+    <div class="term">
+      <div class="word">ARMY</div>
+      <div class="def">o grupo mais absurdo e persigo da internet, infelizmente composto por pessoas seriamente perigosas (meninas adolescentes com muito tempo livre e amor).</div>
+    </div>
+    <div class="term">
+      <div class="word">bias</div>
+      <div class="def">o cara que você escolheu.</div>
+    </div>
+    <div class="term">
+      <div class="word">ocean</div>
+      <div class="def">uma união de pessoas com luzinha pra fazer tudo pegar a cor do negócio.</div>
+    </div>
+    <div class="term">
+      <div class="word">lightstick</div>
+      <div class="def">o bastão totalmente caro que serve pra algo que eu não fiz questão de pesquisar, e muito caro.</div>
+    </div>
+  </section>
+
+  <footer>
+    feito com carinho, sarcasmo e uma pesquisa rápida no Google <span class="heart">&#9825;</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var target = new Date('2026-10-31T19:00:00-03:00').getTime();
+  var d = document.getElementById('d'),
+      h = document.getElementById('h'),
+      m = document.getElementById('m'),
+      s = document.getElementById('s');
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function tick(){
+    var now = new Date().getTime();
+    var diff = Math.max(0, target - now);
+    var days = Math.floor(diff / 86400000);
+    var hours = Math.floor((diff % 86400000) / 3600000);
+    var mins = Math.floor((diff % 3600000) / 60000);
+    var secs = Math.floor((diff % 60000) / 1000);
+    d.textContent = days;
+    h.textContent = pad(hours);
+    m.textContent = pad(mins);
+    s.textContent = pad(secs);
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+(function(){
+  var btn = document.getElementById('revealBtn');
+  var back = document.getElementById('revealBack');
+  var front = btn ? btn.closest('.reveal-front') : null;
+  if(!btn || !back || !front) return;
+  btn.addEventListener('click', function(){
+    front.hidden = true;
+    back.hidden = false;
+  });
+})();
+</script>
+
+</body>
+</html>
